@@ -10,9 +10,9 @@ type Destructable interface {
 	Destroy()
 }
 
-type AppContext interface {
-	CreateAppContextSession(Destructable) (AppContextSession, error)
-}
+// type AppContext interface {
+// 	CreateAppContextSession(Destructable) (AppContextSession, error)
+// }
 
 type AppContextSession interface {
 	RPCHandle(*RPCHandleContext)
@@ -20,10 +20,10 @@ type AppContextSession interface {
 }
 
 type RPCHandleContext struct {
-	Ctx               context.Context
-	Server            *Server
-	Session           *Session
-	AppContext        AppContext
+	Ctx     context.Context
+	Server  *Server
+	Session *Session
+	// AppContext        AppContext
 	AppContextSession AppContextSession
 	Conn              *jsonrpc2.Conn
 	Req               *jsonrpc2.Request

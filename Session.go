@@ -37,7 +37,7 @@ func NewSession(options *SessionOptions) (*Session, error) {
 		destroy_guard: &sync.Once{},
 	}
 
-	app_session, err := self.options.Server.options.AppContext.CreateAppContextSession(self)
+	app_session, err := self.options.Server.options.CreateAppContextSession(self)
 	if err != nil {
 		return nil, err
 	}
@@ -60,10 +60,10 @@ func (self *Session) Log(txt ...interface{}) {
 func (self *Session) Handle(ctx context.Context, conn *jsonrpc2.Conn, req *jsonrpc2.Request) {
 
 	session_context := &RPCHandleContext{
-		Ctx:               ctx,
-		Server:            self.options.Server,
-		Session:           self,
-		AppContext:        self.options.Server.options.AppContext,
+		Ctx:     ctx,
+		Server:  self.options.Server,
+		Session: self,
+		// AppContext:        self.options.Server.options.AppContext,
 		AppContextSession: self.app_context_session,
 		Conn:              conn,
 		Req:               req,

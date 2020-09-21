@@ -23,9 +23,10 @@ type ServerOptions struct {
 	ListenAtAddressesWS  string
 	AsyncRequestHandling bool
 
-	AppContext AppContext
-	EnableTLS  bool
-	TLSConfig  *tls.Config
+	// AppContext AppContext
+	CreateAppContextSession func(Destructable) (AppContextSession, error)
+	EnableTLS               bool
+	TLSConfig               *tls.Config
 }
 
 type Server struct {
