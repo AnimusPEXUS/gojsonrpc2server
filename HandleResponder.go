@@ -46,7 +46,7 @@ func (self *HandleResponder) Defer() error {
 	return nil
 }
 
-// Format message and send it with log()
+// Format message and send it using log()
 func (self *HandleResponder) Log(txt ...interface{}) {
 	t := []interface{}{fmt.Sprintf("[call %s]", self.uuid)}
 	t = append(t, txt...)
