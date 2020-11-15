@@ -62,7 +62,7 @@ func NewSubscriptionMgrSession(
 
 	var res interface{}
 	self.mgr.Log("calling serverinternal for subscription")
-	err = jsonrpc2_conn.Call(ctx, self.mgr.options.RemoteCommand, parameters, &res)
+	err = jsonrpc2_conn.Call(ctx, self.mgr.options.RemoteSubscribeCommand, parameters, &res)
 	if err != nil {
 		return nil, err
 	}
@@ -123,11 +123,13 @@ func (self *SubscriptionMgrSession) Handle(ctx context.Context, conn *jsonrpc2.C
 
 type SubscriptionMgrOptions struct {
 	// Context          *Context
-	UseAsyncHandler           bool
-	GetNewConnection          func() (net.Conn, error)
-	RemoteCommand             string
-	GetDescriptorForParameter func(parameter interface{}) string
-	RespHandler               func(request *jsonrpc2.Request, uuid_str string)
+	UseAsyncHandler            bool
+	GetNewConnection           func() (net.Conn, error)
+	RemoteSubscribtionsCommand string
+	RemoteSubscribeCommand     string
+	RemoteUnsubscribeCommand   string
+	GetDescriptorForParameter  func(parameter interface{}) string
+	RespHandler                func(request *jsonrpc2.Request, uuid_str string)
 }
 
 type SubscriptionMgr struct {
@@ -165,18 +167,18 @@ func (self *SubscriptionMgr) Subscriptions(descriptor string) (unsubscribing_des
 }
 
 func (self *SubscriptionMgr) Subscribe(
-	parameter interface{},
+	remote_subscribe_command_parameter interface{},
 ) (descriptor string, unsubscribing_descriptor string, err error) {
 	self.descriptor_subscriptions_mutex.Lock()
 	defer func() {
 		self.descriptor_subscriptions_mutex.Unlock()
 	}()
 
-	descriptor = self.options.GetDescriptorForParameter(parameter)
+	descriptor = self.options.GetDescriptorForParameter(remote_subscribe_command_parameter)
 
 	mgr_sess, ok := self.descriptor_subscriptions[descriptor]
 	if !ok {
-		mgr_sess, err = NewSubscriptionMgrSession(self, descriptor, parameter)
+		mgr_sess, err = NewSubscriptionMgrSession(self, descriptor, remote_subscribe_command_parameter)
 		if err != nil {
 			return
 		}
