@@ -126,13 +126,19 @@ func (self *SubscriptionMgrSession) Handle(ctx context.Context, conn *jsonrpc2.C
 
 type SubscriptionMgrOptions struct {
 	// Context          *Context
-	UseAsyncHandler            bool
-	GetNewConnection           func() (net.Conn, error)
-	RemoteSubscribtionsCommand string
-	RemoteSubscribeCommand     string
-	RemoteUnsubscribeCommand   string
-	GetDescriptorForParameter  func(parameter interface{}) string
-	RespHandler                func(
+	UseAsyncHandler  bool
+	GetNewConnection func() (net.Conn, error)
+	// RemoteSubscribtionsCommand string // TODO: really needed?
+	RemoteSubscribeCommand string
+
+	// TODO: really needed? since Unsubscribe may anly me needed when
+	//       session's unsubscribing_descriptors length is 0, which already
+	//       leads to disconnect from server (and assumes automatic
+	//       unsubscribtion by server)
+	// RemoteUnsubscribeCommand string
+
+	GetDescriptorForParameter func(parameter interface{}) string
+	RespHandler               func(
 		descriptor string,
 		unsubscribing_descriptor string,
 		request *jsonrpc2.Request,
