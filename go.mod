@@ -3,7 +3,7 @@ module github.com/AnimusPEXUS/gojsonrpc2server
 go 1.14
 
 require (
-	github.com/AnimusPEXUS/utils v0.0.0-20200911041718-e9e04a18b91b
+	github.com/AnimusPEXUS/utils v0.0.0-20201004154315-8e0777d1796e
 	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/satori/go.uuid v1.2.0

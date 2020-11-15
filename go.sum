@@ -3,8 +3,8 @@ github.com/AnimusPEXUS/aipsetup v0.0.0-20200911002707-4954d6474758/go.mod h1:zLn
 github.com/AnimusPEXUS/gotk3collection v0.0.0-20180120235023-bb53fb323a68/go.mod h1:1XDkU7acXhgFwmBO9dt0kABKPOWBP9eBggRZoF/whAY=
 github.com/AnimusPEXUS/shadowusers v0.0.0-20180627163605-fd74be22e8b9/go.mod h1:4tn+OyRSkFNrdxzSPcdON55nczRe2+FkCDvnthw1fMY=
 github.com/AnimusPEXUS/utils v0.0.0-20200911002443-ac60c2a4ab03/go.mod h1:U1wlgSNdUVeutvkHvV67S6a73C1Hk5v4lrQiubv/qwM=
-github.com/AnimusPEXUS/utils v0.0.0-20200911041718-e9e04a18b91b h1:e5QovxfYmSjEEfrelGo7dmTv+p6FQI/V97u/kSMOBI0=
-github.com/AnimusPEXUS/utils v0.0.0-20200911041718-e9e04a18b91b/go.mod h1:KTT6PmB8EKOd0xIAhILMHe/qPAzLpGLFVq5rwxadVtM=
+github.com/AnimusPEXUS/utils v0.0.0-20201004154315-8e0777d1796e h1:3QTlVmaGDF+NqQi3VH7YVSk/dWIZ4vrhRoXdfcza7b4=
+github.com/AnimusPEXUS/utils v0.0.0-20201004154315-8e0777d1796e/go.mod h1:N7YaoOI2rJZMAGzAM4w5Qs2SHyZ77wP7GJHaYzvXnpU=
 github.com/antchfx/htmlquery v1.2.3/go.mod h1:B0ABL+F5irhhMWg54ymEZinzMSi0Kt3I2if0BLYa3V0=
 github.com/antchfx/xpath v1.1.6/go.mod h1:Yee4kTMuNiPYJ7nSNorELQMr1J33uOpXDMByNYhvtNk=
 github.com/antchfx/xpath v1.1.10/go.mod h1:Yee4kTMuNiPYJ7nSNorELQMr1J33uOpXDMByNYhvtNk=
@@ -37,10 +37,12 @@ golang.org/x/net v0.0.0-20190311183353-d8887717615a/go.mod h1:t9HGtf8HONx5eT2rtn
 golang.org/x/net v0.0.0-20190404232315-eb5bcb51f2a3/go.mod h1:t9HGtf8HONx5eT2rtn7q6eTqICYqUVnKs3thJo3Qplg=
 golang.org/x/net v0.0.0-20200421231249-e086a090c8fd/go.mod h1:qpuaurCH72eLCgpAm/N6yyVIVM9cpaDIP3A8BGJEC5A=
 golang.org/x/net v0.0.0-20200904194848-62affa334b73/go.mod h1:/O7V0waA8r7cgGh81Ro3o1hOxt32SMVPicZroKQ2sZA=
+golang.org/x/net v0.0.0-20201002202402-0a1ea396d57c/go.mod h1:iQL9McJNjoIa5mjH6nYTCTZXUN6RP+XW3eib7Ya3XcI=
 golang.org/x/sys v0.0.0-20190215142949-d0b11bdaac8a/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20190412213103-97732733099d/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20200323222414-85ca7c5b95cd/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.0.0-20200909081042-eff7692f9009/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20200930185726-fdedc70b468f/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
 golang.org/x/text v0.3.3/go.mod h1:5Zoc/QRtKVWzQhOtBMvqHzDpF6irO9z98xDceosuGiQ=
 golang.org/x/tools v0.0.0-20180917221912-90fa682c2a6e/go.mod h1:n7NCudcB/nEzxVGmLbDWY5pfWTLqBcC2KZ6jyYvM4mQ=
