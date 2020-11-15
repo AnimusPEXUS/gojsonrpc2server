@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 )
 
+// responder - can be nil - so will not be used
 func ParseParameters(
 	responder *HandleResponder,
 	params *json.RawMessage,
@@ -14,9 +15,11 @@ func ParseParameters(
 
 	data, err := params.MarshalJSON()
 	if err != nil {
-		err2 := responder.LogRespError(500, "error", "can't get input data for unmarshal")
-		if err != nil {
-			responder.Log("can't send error message to caller:", err2, "about:", err)
+		if responder != nil {
+			err2 := responder.LogRespError(500, "error", "can't get input data for unmarshal")
+			if err != nil {
+				responder.Log("can't send error message to caller:", err2, "about:", err)
+			}
 		}
 		cancel_processing = true
 		return
@@ -24,9 +27,11 @@ func ParseParameters(
 
 	err = json.Unmarshal(data, v)
 	if err != nil {
-		err2 := responder.LogRespError(500, "error", "can't unmarshal input data")
-		if err != nil {
-			responder.Log("can't send error message to caller:", err2, "about:", err)
+		if responder != nil {
+			err2 := responder.LogRespError(500, "error", "can't unmarshal input data")
+			if err != nil {
+				responder.Log("can't send error message to caller:", err2, "about:", err)
+			}
 		}
 		cancel_processing = true
 		return
