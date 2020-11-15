@@ -116,7 +116,10 @@ func (self *SubscriptionMgrSession) Handle(ctx context.Context, conn *jsonrpc2.C
 
 	defer responder.Defer()
 
-	self.mgr.options.RespHandler(req, uuid_o_s)
+	for _, i := range self.unsubscribing_descriptors {
+		// TODO: possible place for optimization
+		go self.mgr.options.RespHandler(self.descriptor, i, req, uuid_o_s)
+	}
 	responder.Reply("ok")
 
 }
@@ -129,7 +132,12 @@ type SubscriptionMgrOptions struct {
 	RemoteSubscribeCommand     string
 	RemoteUnsubscribeCommand   string
 	GetDescriptorForParameter  func(parameter interface{}) string
-	RespHandler                func(request *jsonrpc2.Request, uuid_str string)
+	RespHandler                func(
+		descriptor string,
+		unsubscribing_descriptor string,
+		request *jsonrpc2.Request,
+		uuid_str string,
+	)
 }
 
 type SubscriptionMgr struct {
