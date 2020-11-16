@@ -61,7 +61,7 @@ func NewSubscriptionMgrSession(
 	self.jsonrpc2_conn = jsonrpc2_conn
 
 	var res interface{}
-	self.mgr.Log("calling server for subscription. param: ", parameters)
+	// self.mgr.Log("calling server for subscription. param: ", parameters)
 	err = jsonrpc2_conn.Call(ctx, self.mgr.options.RemoteSubscribeCommand, parameters, &res)
 	if err != nil {
 		self.mgr.Log("  error calling server for subscription:", err)
