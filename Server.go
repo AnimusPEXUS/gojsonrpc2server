@@ -27,6 +27,10 @@ type ServerOptions struct {
 	CreateAppContextSession func(Destructable) (AppContextSession, error)
 	EnableTLS               bool
 	TLSConfig               *tls.Config
+
+	HostStaticDir    bool
+	StaticDir        string
+	StaticDirURIPath string
 }
 
 type Server struct {
@@ -295,6 +299,20 @@ func (self *Server) httpThread(
 		mux_router.Path("/socket").Handler(&MyHttpHandler{
 			server: self,
 		})
+		if self.options.HostStaticDir {
+			mux_router.PathPrefix(
+				self.options.StaticDirURIPath,
+			).Handler(
+				http.StripPrefix(
+					self.options.StaticDirURIPath,
+					http.FileServer(
+						http.Dir(
+							self.options.StaticDir,
+						),
+					),
+				),
+			)
+		}
 
 		s := &http.Server{
 			Addr:           self.options.ListenAtAddressesWS,
