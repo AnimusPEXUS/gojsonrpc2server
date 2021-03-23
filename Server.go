@@ -28,9 +28,9 @@ type ServerOptions struct {
 	EnableTLS               bool
 	TLSConfig               *tls.Config
 
-	HostStaticDir    bool
-	StaticDir        string
-	StaticDirURIPath string
+	HostStaticDir          bool
+	StaticDir              string
+	StaticDirURIPathPrefix string
 }
 
 type Server struct {
@@ -301,10 +301,10 @@ func (self *Server) httpThread(
 		})
 		if self.options.HostStaticDir {
 			mux_router.PathPrefix(
-				self.options.StaticDirURIPath,
+				self.options.StaticDirURIPathPrefix,
 			).Handler(
 				http.StripPrefix(
-					self.options.StaticDirURIPath,
+					self.options.StaticDirURIPathPrefix,
 					http.FileServer(
 						http.Dir(
 							self.options.StaticDir,
