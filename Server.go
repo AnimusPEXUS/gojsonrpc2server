@@ -225,6 +225,11 @@ type MyHttpHandler struct {
 }
 
 func (self *MyHttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+
+	self.server.Log("http: preparing new handler")
+
+	self.server.Log("http: preparing websocket")
+
 	upgrader := websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
@@ -236,6 +241,8 @@ func (self *MyHttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	self.server.Log("http: connecting object streamer")
+
 	bs := jsonrpc2websocket.NewObjectStream(conn)
 
 	uuid_str := uuid.NewV4()
@@ -245,6 +252,8 @@ func (self *MyHttpHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// }
 
 	session_id := uuid_str.String()
+
+	self.server.Log("http: new session id is:", session_id)
 
 	newsession_options := &SessionOptions{
 		Server:    self.server,
@@ -296,11 +305,13 @@ func (self *Server) httpThread(
 	for {
 
 		mux_router := mux.NewRouter()
+
 		mux_router.Path("/socket").Handler(&MyHttpHandler{
 			server: self,
 		})
+
 		if self.options.HostStaticDir {
-			self.Log("starting static files hosting:")
+			self.Log("configured static files hosting:")
 			self.Log("  path prefix: ", self.options.StaticDirURIPathPrefix)
 			self.Log("  path on fs : ", self.options.StaticDir)
 			mux_router.PathPrefix(
@@ -316,6 +327,8 @@ func (self *Server) httpThread(
 				),
 			)
 		}
+
+		self.Log("http: address is:", self.options.ListenAtAddressesWS)
 
 		s := &http.Server{
 			Addr:           self.options.ListenAtAddressesWS,
