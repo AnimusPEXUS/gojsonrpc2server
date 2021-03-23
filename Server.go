@@ -300,6 +300,9 @@ func (self *Server) httpThread(
 			server: self,
 		})
 		if self.options.HostStaticDir {
+			self.Log("starting static files hosting:")
+			self.Log("  path prefix: ", self.options.StaticDirURIPathPrefix)
+			self.Log("  path on fs : ", self.options.StaticDir)
 			mux_router.PathPrefix(
 				self.options.StaticDirURIPathPrefix,
 			).Handler(
