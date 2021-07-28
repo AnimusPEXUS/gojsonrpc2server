@@ -60,6 +60,14 @@ func NewSubscriptionMgrSession(
 
 	self.jsonrpc2_conn = jsonrpc2_conn
 
+	if self.mgr.options.Authenticator != nil {
+		err = self.mgr.options.Authenticator(jsonrpc2_conn)
+		if err != nil {
+			self.mgr.Log("  authentication error:", err)
+			return nil, err
+		}
+	}
+
 	var res interface{}
 	// self.mgr.Log("calling server for subscription. param: ", parameters)
 	err = jsonrpc2_conn.Call(ctx, self.mgr.options.RemoteSubscribeCommand, parameters, &res)
@@ -130,6 +138,7 @@ type SubscriptionMgrOptions struct {
 	// Context          *Context
 	UseAsyncHandler  bool
 	GetNewConnection func() (net.Conn, error)
+	Authenticator    func(conn *jsonrpc2.Conn) error
 	// RemoteSubscribtionsCommand string // TODO: really needed?
 	RemoteSubscribeCommand string
 
