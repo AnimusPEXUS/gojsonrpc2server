@@ -238,7 +238,12 @@ func (self *SubscriptionMgr) UnsubscribeAllDescriptors(unsubscribing_descriptor 
 	for _, i := range descriptors {
 		self.inUnsubscribe(i, unsubscribing_descriptor)
 	}
+}
 
+func (self *SubscriptionMgr) UnsubscribeEverything() {
+	for _, i := range self.descriptor_subscriptions {
+		i.Destroy()
+	}
 }
 
 func (self *SubscriptionMgr) Unsubscribe(descriptor string, unsubscribing_descriptor string) {
