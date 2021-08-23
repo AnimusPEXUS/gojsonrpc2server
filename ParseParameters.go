@@ -13,6 +13,16 @@ func ParseParameters(
 	cancel_processing bool,
 ) {
 
+	cancel_processing = true
+
+	defer func() {
+
+		if x := recover(); x != nil {
+			responder.Log("run time panic while processing request: %v", x)
+		}
+	}()
+
+	// TODO: this can crush if params wasn't defined in request
 	data, err := params.MarshalJSON()
 	if err != nil {
 		if responder != nil {
@@ -21,7 +31,6 @@ func ParseParameters(
 				responder.Log("can't send error message to caller:", err2, "about:", err)
 			}
 		}
-		cancel_processing = true
 		return
 	}
 
@@ -33,10 +42,10 @@ func ParseParameters(
 				responder.Log("can't send error message to caller:", err2, "about:", err)
 			}
 		}
-		cancel_processing = true
 		return
 	}
 
 	cancel_processing = false
+
 	return
 }
