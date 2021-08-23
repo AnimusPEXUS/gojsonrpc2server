@@ -11,14 +11,15 @@ func ParseParameters(
 	v interface{},
 ) (
 	cancel_processing bool,
+	paniced bool,
 ) {
 
 	cancel_processing = true
 
 	defer func() {
-
 		if x := recover(); x != nil {
 			responder.Log("run time panic while processing request: %v", x)
+			paniced = true
 		}
 	}()
 
